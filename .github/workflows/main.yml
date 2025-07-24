@@ -1,0 +1,23 @@
+name: Release on Tag
+
+on:
+  push:
+    tags:
+      - 'v*'  # pl. v1.0.0, v2.3.4 stb.
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Create GitHub Release
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ github.ref_name }}
+        release_name: Release ${{ github.ref_name }}
+        draft: false
+        prerelease: false
+        repository: buthiattila/sybell
