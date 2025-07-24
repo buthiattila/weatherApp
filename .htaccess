@@ -1,0 +1,73 @@
+<IfModule mod_rewrite.c>
+    Options +SymLinksIfOwnerMatch +FollowSymLinks -MultiViews -Indexes
+
+	RewriteEngine ON
+	RewriteBase /
+
+    RewriteCond %{REQUEST_URI} ^/environments [NC,OR]
+    RewriteCond %{REQUEST_URI} ^/storage [NC,OR]
+    RewriteCond %{REQUEST_URI} ^/app [NC,OR]
+    RewriteCond %{REQUEST_URI} ^/vendor [NC]
+    RewriteCond %{REQUEST_URI} !\.(php)$ [NC]
+    RewriteRule .* - [F,L]
+
+    RewriteEngine On
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^api/(.*) index.php?t=api&q=$1 [QSA,L]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^ajax/(.*) index.php?t=ajax&q=$1 [QSA,L]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^cron/(.*) index.php?t=cron&q=$1 [QSA,L]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.*) index.php?t=default&q=$1 [QSA,L]
+</IfModule>
+
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh|md|sql|txt)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "^(CHANGELOG.json|KNOWBUGS.json)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header set Connection keep-alive
+    <FilesMatch ".(flv|gif|jpg|jpeg|png|avif|webp|bmp|ico|swf)$">
+        # cache for one month
+        Header set Cache-Control "max-age=2592000, public"
+    </FilesMatch>
+
+    <FilesMatch ".(js|json|css|pdf|txt|map)$">
+        # cache for one week
+        Header set Cache-Control "max-age=604800, public"
+    </FilesMatch>
+
+    <FilesMatch ".(html|htm)$">
+        # cache for one day
+        Header set Cache-Control "max-age=43200, public"
+    </FilesMatch>
+</IfModule>
+
+# compress text, html, javascript, css, xml:
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+# Or, compress certain file types by extension:
+<files *.html>
+    SetOutputFilter DEFLATE
+</files>
