@@ -1,5 +1,6 @@
 {
     "require": {
-        "dragonmantank/cron-expression": "^3.4"
+        "dragonmantank/cron-expression": "^3.4",
+        "smarty/smarty": "^5.5"
     }
 }
