@@ -6,7 +6,7 @@
     <title>Időjárás Monitor</title>
     <link href="assets/plugins/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" type="text/css" rel="stylesheet">
-    <link href="assets/css/main.css?v={$now}" type="text/css" rel="stylesheet">
+    <link href="assets/css/main.css?v={$devVersion}" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -72,8 +72,6 @@
 <script src="assets/plugins/select2/select2.min.js"></script>
 <script src="assets/plugins/select2/i18n/hu.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-{*<script type="module" src="assets/js/main.js?v={$now}"></script>*}
-<script type="module" src="__tests__/main.test.js?v={$now}"></script>
-{*<script src="assets/js/main_old.js?v={$now}"></script>*}
+<script type="module" src="assets/js/main.js?v={$devVersion}"></script>
 </body>
 </html>

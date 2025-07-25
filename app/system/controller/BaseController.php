@@ -4,6 +4,7 @@ namespace controller;
 
 use core\JsonResponse;
 use core\Router;
+use Smarty\Smarty;
 
 abstract class BaseController {
 

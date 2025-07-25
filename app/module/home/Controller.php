@@ -27,7 +27,7 @@ class Controller {
         $smarty->setCompileDir(ROOT_PATH . '/cache/templates');
 
         // Változó átadása a sablonnak (aktuális idő UNIX timestamp formátumban)
-        $smarty->assign('now', time());
+        $smarty->assign('devVersion', 1753458241);
 
         // Sablon megjelenítése (output a böngészőnek)
         $smarty->display('index.tpl');
